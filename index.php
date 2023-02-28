@@ -1,10 +1,17 @@
 <?php
-$questionsQ = $mysqli->query('SELECT * FROM questions WHERE catalog_id='. $catId);
-$result = array();
-while ($question = $questionsQ->fetch_assoc()) {
-    $userQ = $mysqli->query('SELECT name, gender FROM users WHERE id='. $question['user_id']);
-    $user = $userQ->fetch_assoc();
-    $result[] = array('question'=>$question, 'user'=>$user);
-    $userQ->free();
+$mysqli = new mysqli($_ENV['MYSQL_HOST'], $_ENV['MYSQL_USER'], $_ENV['MYSQL_PASSWORD'], $_ENV['MYSQL_DATABASE']);
+
+$catId = (int)$_GET['catId'];
+
+$query = $mysqli->query('
+    select q.*, u.name, u.gender 
+    from questions q 
+        join users u on 
+            q.user_id = u.id and 
+            q.catalog_id=' . $catId);
+
+while ($response = $query->fetch_assoc()) {
+    $result[] = array('question' => $response['q'], 'user' => $response['u']);
 }
-$questionsQ->free();
+
+$query->free();
