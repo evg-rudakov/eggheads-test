@@ -4,6 +4,7 @@ $mysqli = new mysqli($_ENV['MYSQL_HOST'], $_ENV['MYSQL_USER'], $_ENV['MYSQL_PASS
 $catId = (int)$_GET['catId'];
 
 $result = [];
+
 $query = $mysqli->query('
     select q.*, u.name, u.gender 
     from questions q 
