@@ -5,7 +5,7 @@ function getOrderTotal(responseString) {
     let response = JSON.parse(responseString);
     let total = 0;
 
-    response.forEach(function(item, index) {
+    response.forEach(function (item, index) {
         let price = parseInt(item.price, 10);
 
         if (isNaN(price)) {
@@ -17,8 +17,7 @@ function getOrderTotal(responseString) {
     return total;
 }
 
-function printOrderTotal(response)
-{
+function printOrderTotal(response) {
     let total = this.getOrderTotal(response);
     let message = 'Бесплатно';
 
@@ -26,5 +25,5 @@ function printOrderTotal(response)
         message = total + ' руб';
     }
 
-    console.log( 'Стоимость заказа: '+ message);
+    console.log('Стоимость заказа: ' + message);
 }
