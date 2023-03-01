@@ -4,6 +4,7 @@ getOrderTotal(r);
 function getOrderTotal(responseString) {
     let response = JSON.parse(responseString);
     let total = 0;
+
     response.forEach(function(item, index) {
         let price = parseInt(item.price, 10);
 
@@ -24,5 +25,6 @@ function printOrderTotal(response)
     if (total > 0) {
         message = total + ' руб';
     }
+
     console.log( 'Стоимость заказа: '+ message);
 }
